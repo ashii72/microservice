@@ -1,5 +1,7 @@
 package com.example.microservice.model;
 
+import com.example.microservice.dto.ProductDto;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -29,6 +31,7 @@ public class Product {
     public Product() {
 
     }
+
 
     @Override
     public boolean equals(Object o) {
