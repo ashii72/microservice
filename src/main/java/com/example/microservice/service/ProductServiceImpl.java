@@ -56,6 +56,9 @@ public class ProductServiceImpl implements ProductService {
             if (foundProduct.isPresent()) {
                 foundProduct.get().setName(productDto.getName());
                 foundProduct.get().setPrice(productDto.getPrice());
+                foundProduct.get().setColor(productDto.getColor());
+                foundProduct.get().setBrand(productDto.getBrand());
+                foundProduct.get().setCategory(productDto.getCategory());
                 var updatedProduct = productRepository.save(foundProduct.get());
                 return convertProductToProductDto(updatedProduct);
             }
