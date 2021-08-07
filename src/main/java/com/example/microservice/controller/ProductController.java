@@ -39,9 +39,14 @@ public class ProductController {
         return productService.findProductByCategory(category).orElseThrow(() -> new NotFoundException("Product category " + category + " not found!"));
     }
 
+//    @PostMapping("/save")
+//    public Product saveProduct(@RequestBody ProductDto productDto) {
+//        return productService.saveProduct(new Product(productDto.getId(),productDto.getName(),productDto.getPrice(), productDto.getColor(), productDto.getBrand(), productDto.getCategory()));
+//    }
+
     @PostMapping("/save")
-    public Product saveProduct(@RequestBody ProductDto productDto) {
-        return productService.saveProduct(new Product());
+    public Product saveProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 
     @PostMapping("edit/{id}")
