@@ -1,7 +1,9 @@
 package com.example.microservice.service;
 
 import com.example.microservice.dto.ProductDto;
+import com.example.microservice.dto.ResponseDto;
 import com.example.microservice.model.Product;
+import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,17 +12,17 @@ import java.util.Optional;
 @Service
 public interface ProductService {
 
-    Optional<Product> findProductById(long id);
+    Product findProductById(long id) throws NotFoundException;
     Optional<Product> findProductByName(String name);
-    Optional<Product> findProductByBrand(String brand);
-    Optional<Product> findProductByCategory(String category);
+    Product findProductByBrand(String brand) throws NotFoundException;
+    Product findProductByCategory(String category) throws NotFoundException;
 
-    Product saveProduct(Product product);
+    ProductDto saveProduct(ProductDto productDto);
     ProductDto editProductById(ProductDto productDto);
-    void deleteProductById(long id);
+    ResponseDto deleteProductById(Long id);
 
     ProductDto convertProductToProductDto(Product product);
-    Optional<Product> convertProductDtoToProduct(ProductDto productDto);
+    Product convertProductDtoToProduct(ProductDto productDto);
 
     List<Product> findAllProducts();
     List<Product> findAllProductsByOrderByNameAsc();

@@ -1,6 +1,7 @@
 package com.example.microservice.controller;
 
 import com.example.microservice.dto.ProductDto;
+import com.example.microservice.dto.ResponseDto;
 import com.example.microservice.model.Product;
 import com.example.microservice.service.ProductService;
 import javassist.NotFoundException;
@@ -26,27 +27,22 @@ public class ProductController {
 
     @GetMapping("/id/{id}")
     public Product getById(@PathVariable("id") long id) throws NotFoundException {
-        return productService.findProductById(id).orElseThrow(() -> new NotFoundException("Product id " + id + " not found!"));
+        return productService.findProductById(id);
     }
 
     @GetMapping("/brand/{brand}")
     public Product getByBrand(@PathVariable("brand") String brand) throws NotFoundException {
-        return productService.findProductByBrand(brand).orElseThrow(() -> new NotFoundException("Product brand " + brand + " not found!"));
+        return productService.findProductByBrand(brand);
     }
 
     @GetMapping("/category/{category}")
     public Product getByCategory(@PathVariable("category") String category) throws NotFoundException {
-        return productService.findProductByCategory(category).orElseThrow(() -> new NotFoundException("Product category " + category + " not found!"));
+        return productService.findProductByCategory(category);
     }
 
-//    @PostMapping("/save")
-//    public Product saveProduct(@RequestBody ProductDto productDto) {
-//        return productService.saveProduct(new Product(productDto.getId(),productDto.getName(),productDto.getPrice(), productDto.getColor(), productDto.getBrand(), productDto.getCategory()));
-//    }
-
     @PostMapping("/save")
-    public Product saveProduct(@RequestBody Product product) {
-        return productService.saveProduct(product);
+    public ProductDto saveProduct(@RequestBody ProductDto productDto) {
+        return productService.saveProduct(productDto);
     }
 
     @PostMapping("edit/{id}")
@@ -55,12 +51,12 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteProductById(@PathVariable("id") long id) {
-        productService.deleteProductById(id);
+    public ResponseDto deleteProductById(@PathVariable("id") Long id) {
+        return productService.deleteProductById(id);
     }
 
 
-    @GetMapping("/list")
+    @GetMapping("/get-all-product")
     public List<Product> finaAllProducts() {
         return productService.findAllProducts();
     }
